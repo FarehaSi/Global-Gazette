@@ -1,0 +1,6 @@
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/FarehaSi/global-gazette-frontend.git
+[submodule "backend"]
+	path = backend
+	url = https://github.com/FarehaSi/global-gazette-backend.git
