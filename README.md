@@ -57,3 +57,16 @@ This epic revolves around user profiles and interactions between users. Users ca
 - As a user, I can view all posts by a specific user to catch up on their latest content or decide to follow them.
 - As a logged-in user, I can edit my profile, including changing my profile picture and bio.
 - As a logged-in user, I can update my username and password for security and display name changes.
+## Design - UI
+The Global Gazette's overall design philosophy revolves around a clean, intuitive, and user-friendly interface. Readability and ease of navigation are prioritized to ensure that our readers can effortlessly access a world of global insights and stories. Our design is aimed at creating a seamless and enjoyable browsing experience.
+### Typography
+We've carefully selected Montserrat as our primary font. Its modern and bold design complements the theme of the Global Gazette, while ensureing readability and an elegant, timeless feel.
+### Color Palette
+#### Background (White)
+A clean white background serves as a canvas, spotlighting our content and enhancing the overall readability of the blog.
+#### Font Color (Black)
+The black font color exudes elegance and timelessness, emphasizing the reliability.
+### Logo & Imagery
+The logo, elegantly designed with Montserrat typography, features a globe at its core. This globe symbolizes our platform's global identity and its mission to connect minds, cultures, and perspectives from every corner of the world. The imagery we use throughout our platform reflects the diversity and interconnectedness of our global community, adding depth and visual interest to our content.
+### Layout & Composition
+Our layouts are thoughtfully structured to guide readers seamlessly through our content. We use whitespace generously to maintain a clutter-free experience, emphasizing the purity and simplicity of the information we provide. Our aim is to make navigation intuitive and content-focused.
