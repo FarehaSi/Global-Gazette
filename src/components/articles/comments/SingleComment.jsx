@@ -6,6 +6,7 @@ import apiFetch from '../../../utils/api';
 import { faCommentDots } from '@fortawesome/free-regular-svg-icons';
 import GetSingleUserDetail from '../singles/GetSingleUserDetail';
 import timeAgo from '../../../utils/timeAgo';
+import { Dropdown } from 'react-bootstrap';
 
 const SingleComment = ({ 
   comment,
@@ -19,14 +20,61 @@ const SingleComment = ({
   const [liked, setLiked] = useState(comment.is_liked || false);
   const [replyText, setReplyText] = useState('');
   const isOwnedByCurrentUser = comment.user === currentUserId;
+  const [isEditing, setIsEditing] = useState(false);
+  const [editText, setEditText] = useState(comment.text);
   
   const handleEdit = () => {
-    console.log('Edit Comment', comment.id);
+    setIsEditing(true);
   };
 
-  const handleDelete = () => {
-    console.log('Delete Comment', comment.id);
+  const handleUpdate = async () => {
+    if (!editText.trim()) {
+      alert("Comment text cannot be empty.");
+      return;
+    }
+    try {
+      const response = await apiFetch(`/comments/${comment.id}/edit/`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          text: editText,
+          article: comment.article
+        })
+      });
+
+      if (response.id) {
+        setIsEditing(false);
+        onReplyPosted();
+      } else {
+        console.error('Failed to update comment');
+      }
+    } catch (error) {
+      console.error('Error updating the comment:', error);
+    }
   };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    setEditText(comment.text);
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm('Are you sure you want to delete this comment?')) {
+      try {
+        const endpoint = `/comments/${comment.id}/delete/`;
+        await apiFetch(endpoint, {
+          method: 'DELETE',
+        });
+  
+        onReplyPosted();
+      } catch (error) {
+        console.error('Error deleting the comment:', error);
+      }
+    }
+  };
+  
 
   const toggleReplyInput = () => {
     onSetActiveInputId(isInputActive ? null : comment.id);
@@ -129,16 +177,33 @@ const SingleComment = ({
           </div>
           {isOwnedByCurrentUser && (
             <div className="btn-group">
-              <button className="btn btn-sm dropdown-toggle comment-options-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <FontAwesomeIcon icon={faEllipsisV} />
-              </button>
-              <div className="dropdown-menu dropdown-menu-right">
-                <button className="dropdown-item" onClick={handleEdit}>Edit</button>
-                <button className="dropdown-item" onClick={handleDelete}>Delete</button>
-              </div>
+              {isOwnedByCurrentUser && (
+                <Dropdown className="d-inline mx-2">
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    <FontAwesomeIcon icon={faEllipsisV} />
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu className='bg-white'>
+                    <Dropdown.Item href="#/edit" onClick={handleEdit}>Edit</Dropdown.Item>
+                    <Dropdown.Item href="#/delete" onClick={handleDelete}>Delete</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              )}
             </div>
           )}
         </div>
+
+        {isEditing ? (
+        <div>
+          <textarea
+            className="form-control"
+            value={editText}
+            onChange={(e) => setEditText(e.target.value)}
+          ></textarea>
+          <button className="btn btn-primary btn-sm" onClick={handleUpdate}>Update</button>
+          <button className="btn btn-secondary btn-sm" onClick={handleCancelEdit}>Cancel</button>
+        </div>
+      ) : ""}
         {isInputActive && (
           <div className="reply-form mt-3">
             <textarea
