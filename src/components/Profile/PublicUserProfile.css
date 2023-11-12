@@ -1,0 +1,9 @@
+.sticky-user-profile {
+    position: sticky;
+    top: 70px;
+    height: fit-content;
+}
+
+.border-left {
+    border-left: 1px solid #dee2e6;
+}
