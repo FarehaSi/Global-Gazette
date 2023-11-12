@@ -3,6 +3,7 @@ import User from './PublicUser/User'
 import { useParams } from 'react-router-dom'
 import UserArticles from './PublicUser/UserArticles';
 import './PublicUserProfile.css';
+import MostFollowedUsers from '../home/MostFollowedUsers';
 
 const PublicUserProfile = () => {
     const {userId} = useParams();
@@ -13,6 +14,7 @@ const PublicUserProfile = () => {
             </div>
             <div className="col-md-4 sticky-user-profile border-left">
                 <User userId={userId} />
+                <MostFollowedUsers />
             </div>
         </div>
     )

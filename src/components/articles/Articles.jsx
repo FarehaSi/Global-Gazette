@@ -126,7 +126,7 @@ const Articles = () => {
                                 onChange={handleSearchChange}
                             />
                         </div>
-                        <MostFollowedUsers />
+                        {/* <MostFollowedUsers /> */}
                         {/* <h2 className="mb-3">Discover more of what matters to you</h2>
                         <div className="row">
                             {categories.map((category) => (
