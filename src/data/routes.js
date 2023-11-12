@@ -11,6 +11,7 @@ import Followers from "../pages/Profile/Followers";
 import Index from "../pages/Profile/Index";
 import LikedPosts from "../pages/Profile/LikedPosts";
 import MyPosts from "../pages/Profile/MyPosts";
+import PUC from "../pages/Profile/PUC";
 import Tags from "../pages/Profile/Tags";
 import Register from "../pages/Register";
 
@@ -104,6 +105,12 @@ const routes = [
         id: 13, 
         path: '/articles',
         element: AllArticles,
+        isProtected: true
+    },
+    {
+        id: 14, 
+        path: '/public/user/:userId',
+        element: PUC,
         isProtected: true
     },
 ];

@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import timeAgo from '../../utils/timeAgo';
 import apiFetch from '../../utils/api';
 import { CLOUDINARY_URL } from '../../data/config';
+import { Link } from 'react-router-dom';
 
 const useUser = (userId) => {
   return useQuery(['user', userId], async () => {
@@ -59,7 +60,7 @@ const UserProfile = ({ userId, datePosted }) => {
       />
       <div>
         <div className='row'>
-          <div className="col fw-bold">{user?.full_name || user?.username}</div>
+          <Link to={`/public/user/${user?.id}`} className="col fw-bold">{user?.full_name || user?.username}</Link>
           <button
             className={`col btn ${isFollowing ? 'btn-secondary' : 'btn-success'} ms-auto`}
             onClick={handleFollowClick}
