@@ -1,0 +1,27 @@
+.create-article-container {
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .create-article-container .card-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .create-article-container .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .create-article-container .quill {
+    background-color: white;
+  }
+  
+  .create-article-container .btn-primary {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+  
+  .create-article-container .btn-primary:hover {
+    background-color: #003d6f;
+  }
+  

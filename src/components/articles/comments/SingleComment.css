@@ -1,0 +1,86 @@
+.user-owned-comment {
+  background-color: #f8f9fa;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); 
+}
+
+.comment-like.liked, .comment-reply {
+  background-color: #007bff;
+  color: white;
+}
+
+.comment-options-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.comment-options-dropdown {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  z-index: 1000;
+  right: 0;
+}
+
+.media {
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #eff1f3;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+
+.user-avatar {
+  width: 48px;
+  height: 48px;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.time-ago {
+  font-size: 12px;
+}
+
+.comment-text {
+  font-size: 14px;
+  color: #333;
+}
+
+.like-button, .reply-button {
+  color: #333;
+  background-color: transparent;
+  border: none;
+}
+
+.like-button.liked, .like-button:focus {
+  color: #0d6efd;
+}
+
+.like-count {
+  margin-left: 4px;
+}
+
+.comment-options-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.dropdown-menu {
+  min-width: 90px;
+}
+
+.reply-form textarea {
+  border-radius: 18px;
+}
+
+.reply-form button {
+  border-radius: 18px;
+}
