@@ -4,6 +4,7 @@ import ListSingleView from './ListSingleView';
 import apiFetch from '../../utils/api';
 import Skeleton from './Skeleton';
 import { CLOUDINARY_URL } from '../../data/config';
+import MostFollowedUsers from '../home/MostFollowedUsers';
 
 const fetchArticles = async ({ pageParam = 1, queryKey }) => {
     const [_key, searchTerm] = queryKey;
@@ -125,6 +126,7 @@ const Articles = () => {
                                 onChange={handleSearchChange}
                             />
                         </div>
+                        <MostFollowedUsers />
                         {/* <h2 className="mb-3">Discover more of what matters to you</h2>
                         <div className="row">
                             {categories.map((category) => (
