@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const useUser = (userId) => {
   return useQuery(['user', userId], async () => {
-    return apiFetch(`/auth/users/${userId}/`);
+    return apiFetch(`/auth/users/${userId}/`, {}, false);
   });
 };
 
@@ -19,10 +19,8 @@ const UserProfile = ({ userId, datePosted }) => {
   const followMutation = useMutation(
     () => apiFetch(`/auth/follow/${userId}/`, {
       method: 'POST',
-      headers: {
-        
-      }
-    }),
+      headers: {}
+    }, false),
     {
       onSuccess: (data) => {
         setIsFollowing((prev) => !prev);
@@ -40,7 +38,6 @@ const UserProfile = ({ userId, datePosted }) => {
   }
 
   const handleFollowClick = () => {
-    // Call the mutation to follow/unfollow user
     followMutation.mutate();
   };
 
@@ -48,7 +45,7 @@ const UserProfile = ({ userId, datePosted }) => {
     return `https://api.multiavatar.com/${encodeURIComponent(name)}.png`;
   };
 
-  const imageUrl = `${CLOUDINARY_URL}${user?.profile_picture}` || getAvatarUrl(user?.full_name || user?.username);
+  const imageUrl = user?.profile_picture ? `${CLOUDINARY_URL}${user.profile_picture}` : getAvatarUrl(user?.full_name || user?.username);
 
   return (
     <div className="d-flex flex-col align-items-center justify-content-start py-3">

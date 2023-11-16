@@ -73,7 +73,7 @@ const routes = [
         id: 8, 
         path: '/articles/:articleId',
         element: SingleArticle,
-        isProtected: true
+        isProtected: false
     },
     
     {

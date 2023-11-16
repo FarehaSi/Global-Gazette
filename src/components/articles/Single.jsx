@@ -13,7 +13,7 @@ const Single = ({ articleId }) => {
     
     const { data: article, error, isLoading } = useQuery(
         ['article', articleId],
-        () => apiFetch(`/articles/${articleId}/`), 
+        () => apiFetch(`/articles/${articleId}/`, {}, false), 
         {
           refetchOnWindowFocus: true
         }
