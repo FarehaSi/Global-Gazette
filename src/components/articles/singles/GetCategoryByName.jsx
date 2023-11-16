@@ -8,7 +8,7 @@ const GetCategoryByName = ({ categoryId }) => {
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const response = await apiFetch(`/categories/${categoryId}/`);
+        const response = await apiFetch(`/categories/${categoryId}/`, {}, false);
         setCategory(response);
       } catch (err) {
         setError(err.message || 'Something went wrong');
