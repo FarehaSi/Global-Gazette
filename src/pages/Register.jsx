@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import Guest from '../layouts/GuestLayout'
 import Form from '../components/register/Form';
+import AuthLayout from '../layouts/Layout';
 
 const Register = () => {
   return (
-    <Guest>
+    <AuthLayout>
         <Form />
-    </Guest>
+    </AuthLayout>
   )
 }
 
