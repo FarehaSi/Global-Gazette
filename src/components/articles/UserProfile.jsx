@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import timeAgo from '../../utils/timeAgo';
 import apiFetch from '../../utils/api';
 import { CLOUDINARY_URL } from '../../data/config';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const useUser = (userId) => {
   return useQuery(['user', userId], async () => {
@@ -13,6 +13,7 @@ const useUser = (userId) => {
 
 const UserProfile = ({ userId, datePosted }) => {
   const queryClient = useQueryClient();
+  const history = useNavigate();
   const { data: user, isLoading, isError, error } = useUser(userId);
   const [isFollowing, setIsFollowing] = useState(null);
   
@@ -38,6 +39,11 @@ const UserProfile = ({ userId, datePosted }) => {
   }
 
   const handleFollowClick = () => {
+    const token = localStorage.getItem('jwtToken');
+    if (!token) {
+      history('/login');
+      return;
+    }
     followMutation.mutate();
   };
 
