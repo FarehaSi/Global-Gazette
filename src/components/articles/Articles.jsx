@@ -5,6 +5,7 @@ import apiFetch from '../../utils/api';
 import Skeleton from './Skeleton';
 import { CLOUDINARY_URL } from '../../data/config';
 import MostFollowedUsers from '../home/MostFollowedUsers';
+import Footer from '../Footer';
 
 const fetchArticles = async ({ pageParam = 1, queryKey }) => {
     const [_key, searchTerm] = queryKey;
@@ -126,6 +127,7 @@ const Articles = () => {
                                 onChange={handleSearchChange}
                             />
                         </div>
+                        <Footer />
                         {/* <MostFollowedUsers /> */}
                         {/* <h2 className="mb-3">Discover more of what matters to you</h2>
                         <div className="row">

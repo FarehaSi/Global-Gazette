@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import apiFetch from '../../../utils/api';
+import Select from 'react-select';
 
 const SelectListTags = ({ selectedTags, onSelect }) => {
   const [tags, setTags] = useState([]);
@@ -8,8 +9,12 @@ const SelectListTags = ({ selectedTags, onSelect }) => {
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const response = await apiFetch('/tags');
-        setTags(response.results);
+        const response = await apiFetch('/tags?no_pagination=true');
+        const formattedTags = response.map(tag => ({
+          value: tag.id,
+          label: tag.name,
+        }));
+        setTags(formattedTags);
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching tags:', error);
@@ -21,26 +26,25 @@ const SelectListTags = ({ selectedTags, onSelect }) => {
   }, []);
 
   if (isLoading) return <p>Loading...</p>;
-  const selectedTagsArray = Array.isArray(selectedTags) ? selectedTags : [];
+
+  const handleChange = (selectedOptions) => {
+    const values = selectedOptions ? selectedOptions.map(option => option.value) : [];
+    onSelect(values);
+  };
+
+  const selectedOptions = tags.filter(tag => selectedTags.includes(tag.value));
 
   return (
     <div>
-      <select
-        className="form-control"
-        value={selectedTagsArray}
-        onChange={(e) => {
-          const selectedValues = Array.from(e.target.selectedOptions, option => option.value);
-          onSelect(selectedValues);
-        }}
-        multiple
-      >
-        <option value="" disabled>Select tags</option>
-        {tags.map((tag) => (
-          <option key={tag.id} value={tag.id}>
-            {tag.name}
-          </option>
-        ))}
-      </select>
+      <Select
+        defaultValue={selectedOptions}
+        isMulti
+        name="tags"
+        options={tags}
+        className="basic-multi-select"
+        classNamePrefix="select"
+        onChange={handleChange}
+      />
     </div>
   );
 };

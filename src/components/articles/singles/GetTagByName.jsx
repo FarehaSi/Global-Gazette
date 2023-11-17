@@ -9,7 +9,7 @@ const GetTagByName = ({ tagId }) => {
   useEffect(() => {
     const fetchTag = async () => {
       try {
-        const response = await apiFetch(`/tags/${tagId}/`);
+        const response = await apiFetch(`/tags/${tagId}/`, {}, false);
         setTag(response);
       } catch (err) {
         setError(err.message || 'Something went wrong');

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import apiFetch from '../../../utils/api';
+import Select from 'react-select';
 
 const SelectList = ({ selectedCategory, onSelect }) => {
   const [categories, setCategories] = useState([]);
@@ -8,8 +9,12 @@ const SelectList = ({ selectedCategory, onSelect }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await apiFetch('/categories');
-        setCategories(response.results); // Update to use 'results' instead of 'data'
+        const response = await apiFetch('/categories?no_pagination=true');
+        const formattedCategories = response.map((category) => ({
+          value: category.id,
+          label: category.name,
+        }));
+        setCategories(formattedCategories);
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -22,20 +27,24 @@ const SelectList = ({ selectedCategory, onSelect }) => {
 
   if (isLoading) return <p>Loading...</p>;
 
+  const handleChange = (selectedOption) => {
+    onSelect(selectedOption ? selectedOption.value : '');
+  };
+
+  const selectedOption = categories.find(option => option.value === selectedCategory);
+
   return (
     <div>
-      <select
-        className="form-control"
-        value={selectedCategory}
-        onChange={(e) => onSelect(e.target.value)}
-      >
-        <option value="">Select a category</option>
-        {categories.map((category) => (
-          <option key={category.id} value={category.id}>
-            {category.name}
-          </option>
-        ))}
-      </select>
+      <Select
+        className="basic-single"
+        classNamePrefix="select"
+        value={selectedOption}
+        onChange={handleChange}
+        isClearable={true}
+        isSearchable={true}
+        options={categories}
+        placeholder="Select a category"
+      />
     </div>
   );
 };

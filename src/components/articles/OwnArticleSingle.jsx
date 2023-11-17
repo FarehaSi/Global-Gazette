@@ -66,7 +66,7 @@ const OwnArticleSingle = ({ articleId, author, title, snippet, date, likes, comm
               </div>
             </div>
             <Link to={`/articles/${articleId}`} className="text-decoration-none text-black">
-              <h2>{title}</h2>hsjdhs
+              <h2>{title}</h2>
               <p dangerouslySetInnerHTML={createMarkup(snippet)}></p>
               <div className="d-flex justify-content-between align-items-center mt-2">
                 <span className="text-muted">{date}</span>
