@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import apiFetch from '../../utils/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpFromBracket, faComment, faHandsClapping } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +13,7 @@ const ArticleActions = ({ articleId, totalLikes, totalComments }) => {
     const [likes, setLikes] = useState(totalLikes); 
     const [isCommentsOpen, setCommentsOpen] = useState(false);
     const [commentsRefreshKey, setCommentsRefreshKey] = useState(0);
+    const history = useNavigate();
 
     const handleNewComment = () => {
         setCommentsRefreshKey(prevKey => prevKey + 1);
@@ -20,9 +22,20 @@ const ArticleActions = ({ articleId, totalLikes, totalComments }) => {
     const handleNewCommentOrReply = () => {
         setCommentsRefreshKey(prevKey => prevKey + 1);
     };
-    
+
+    const checkAuthAndRedirect = () => {
+        const token = localStorage.getItem('jwtToken');
+        if (!token) {
+            history('/login');
+            return false;
+        }
+        return true;
+    };
+
     const toggleComments = () => {
-        setCommentsOpen(!isCommentsOpen);
+        if (checkAuthAndRedirect()) {
+            setCommentsOpen(!isCommentsOpen);
+        }
     };
 
     useEffect(() => {
@@ -30,6 +43,10 @@ const ArticleActions = ({ articleId, totalLikes, totalComments }) => {
     }, [totalLikes]);
 
     const handleLike = async () => {
+        if (!checkAuthAndRedirect()) {
+            return;
+        }
+
         try {
             const endpoint = `/articles/${articleId}/react/like/`; 
             const response = await apiFetch(endpoint, { method: 'POST' });
