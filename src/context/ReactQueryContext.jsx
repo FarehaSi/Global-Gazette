@@ -67,25 +67,42 @@ export const AuthProvider = ({ children }) => {
 
     const registerMutation = useMutation(
         async (credentials) => {
-            return fetch(`${API_BASE_URL}/auth/register/`, {
+            const response = await fetch(`${API_BASE_URL}/auth/register/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(credentials),
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.username && data.username[0] === "A user with that username already exists.") {
-                    throw data;
-                }
-                return data;
             });
+            const data = await response.json();
+    
+            if (!response.ok) {
+                throw data;
+            }
+    
+            return data;
         },
         {
-            onSuccess: (data) => {
-                localStorage.setItem("jwtToken", data.token);
-                setIsAuthenticated(true);
+            onSuccess: async (data, variables) => {
+                try {
+                    const loginResponse = await fetch(`${API_BASE_URL}/auth/login/`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ username: variables.username, password: variables.password }),
+                    });
+                    const loginData = await loginResponse.json();
+    
+                    if (!loginResponse.ok) {
+                        throw loginData;
+                    }
+                    localStorage.setItem("jwtToken", loginData.token);
+                    setIsAuthenticated(true);
+                    await fetchCurrentUser();
+                } catch (error) {
+                    console.error("Login error after registration:", error);
+                }
             },
             onError: (error) => {
                 console.error("Registration error:", error);

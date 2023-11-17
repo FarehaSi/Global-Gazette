@@ -27,7 +27,7 @@ const Form = () => {
         try {
             await register.mutateAsync(formData);  
             // alert('Registration successful!'); 
-            navigate('/login'); 
+            navigate('/profile'); 
         } catch (error) {
             if (error?.username && error.username[0] === "A user with that username already exists.") {
                 alert("A user with that username already exists.");
