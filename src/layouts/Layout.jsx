@@ -7,7 +7,7 @@ const AuthLayout = ({ children }) => {
   return (
     <div>
         <Navbar />
-        <div className='mt-5'>
+        <div className=''>
             {children}
         </div>
         <Footer />
