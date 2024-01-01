@@ -1,18 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../context/ReactQueryContext';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import apiFetch from '../../utils/api';
 import { CLOUDINARY_URL, SERVER_URL } from '../../data/config';
 import Notification from './Notification';
 
 const Profile = () => {
-    const { user } = useAuth();
+    const { user, setUser } = useAuth();
     const [fullName, setFullName] = useState(user?.full_name);
     const [bio, setBio] = useState(user?.bio);
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(user?.profile_picture);
     const fileInputRef = useRef(null);
     const [notification, setNotification] = useState({ message: '', type: '' });
+    const queryClient = useQueryClient();
 
     const updateUserProfileMutation = useMutation(
         (formData) => apiFetch('/auth/me/update', {
@@ -21,6 +22,9 @@ const Profile = () => {
         }, true, false),
         {
             onSuccess: (data) => {
+                // localStorage.setItem('jwtToken', data.token);
+                setUser(data.user);
+                queryClient.invalidateQueries('currentUser');
                 setNotification({ message: 'Profile updated successfully!', type: 'success' });
             },
             onError: (error) => {

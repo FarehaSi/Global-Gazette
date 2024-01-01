@@ -45,6 +45,7 @@ const AllLikedPosts = () => {
           comments={article.comment_count}
           tags={(article.tag_names || []).map(tag => tag.name)}
           thumbnail={`${CLOUDINARY_URL}${article.thumbnail}`}
+          category={article.category}
         />
       ))}
 

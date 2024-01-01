@@ -23,9 +23,14 @@ export const AuthProvider = ({ children }) => {
             setUser(null);
             localStorage.removeItem('jwtToken');
             return null;
+        }else{
+            setUser(data);
         }
-        setUser(data);
         return data;
+    };
+    
+    const setUserInContext = (userData) => {
+        setUser(userData);
     };
 
     const { isError: userProfileError } = useQuery('currentUser', fetchCurrentUser, {
@@ -121,7 +126,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, user, login: loginMutation, register: registerMutation, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, user, setUser: setUserInContext, login: loginMutation, register: registerMutation, logout }}>
             {children}
         </AuthContext.Provider>
     );
