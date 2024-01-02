@@ -36,13 +36,17 @@ const AuthArticles = () => {
     const [filter, setFilter] = useState('all'); 
 
     const fetchArticles = async ({ pageParam = 1, queryKey }) => {
-        const [_key, filter, searchTerm] = queryKey;
-        let endpoint;
+        const [_key, filter, searchTerm, selectedCategory] = queryKey;
+        let endpoint = `/articles/search/?page=${pageParam}`;
         if (filter === 'followed') {
             endpoint = `/articles/user/following/?page=${pageParam}`;
         } else {
-            const searchQueryParam = searchTerm ? `&search=${searchTerm}` : '';
-            endpoint = `/articles/search/?page=${pageParam}${searchQueryParam}`;
+            if (searchTerm) {
+                endpoint += `&search=${searchTerm}`;
+            }
+            if (selectedCategory) {
+                endpoint += `&category_ids=${selectedCategory}`;
+            }
         }
         const res = await apiFetch(endpoint, { method: 'GET' }, true);
         return res;
