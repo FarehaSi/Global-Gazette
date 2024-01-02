@@ -8,7 +8,7 @@ import Slideover from '../Slideover';
 import CommentsSection from './comments/CommentsSection';
 import NewComment from './comments/NewComment';
 
-const ArticleActions = ({ articleId, totalLikes, totalComments }) => {
+const ArticleActions = ({ articleId, totalLikes, totalComments, onCommentsToggle }) => {
     const [liked, setLiked] = useState(false);
     const [likes, setLikes] = useState(totalLikes); 
     const [isCommentsOpen, setCommentsOpen] = useState(false);
@@ -31,10 +31,13 @@ const ArticleActions = ({ articleId, totalLikes, totalComments }) => {
         }
         return true;
     };
-
-    const toggleComments = () => {
+    
+    const handleCommentButtonClick = () => {
         if (checkAuthAndRedirect()) {
-            setCommentsOpen(!isCommentsOpen);
+            const commentsElement = document.getElementById("comments-section");
+            if (commentsElement) {
+                commentsElement.scrollIntoView({ behavior: "smooth" });
+            }
         }
     };
 
@@ -72,7 +75,7 @@ const ArticleActions = ({ articleId, totalLikes, totalComments }) => {
                     <FontAwesomeIcon icon={faHandsClapping} className={likeIconClass} />
                     <span className="action-count">{likes}</span>
                 </div>
-                <div className="action-item" onClick={toggleComments}>
+                <div className="action-item" onClick={handleCommentButtonClick}>
                     <FontAwesomeIcon icon={faComment} />
                     <span className="action-count">{totalComments}</span>
                 </div>
@@ -81,10 +84,10 @@ const ArticleActions = ({ articleId, totalLikes, totalComments }) => {
             <div className="action-item">
                 <FontAwesomeIcon icon={faArrowUpFromBracket} />
             </div>
-            <Slideover isOpen={isCommentsOpen} onClose={() => setCommentsOpen(false)}>
+            {/* <Slideover isOpen={isCommentsOpen} onClose={() => setCommentsOpen(false)}>
                 <NewComment articleId={articleId} onCommentPosted={handleNewCommentOrReply} />
                 <CommentsSection articleId={articleId} refreshKey={commentsRefreshKey} onCommentPosted={handleNewCommentOrReply} />
-            </Slideover>
+            </Slideover> */}
         </div>
     );
 };

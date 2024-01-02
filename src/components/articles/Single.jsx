@@ -7,9 +7,17 @@ import ArticleActions from './ArticleActions';
 import DOMPurify from 'dompurify';
 import { CLOUDINARY_URL } from '../../data/config';
 import GetCategoryByName from './singles/GetCategoryByName';
-import GetTagByName from './singles/GetTagByName';
+import './Single.css';
+import NewComment from './comments/NewComment';
+import CommentsSection from './comments/CommentsSection';
 
 const Single = ({ articleId }) => {
+  const [isCommentsOpen, setCommentsOpen] = useState(false);
+    const [commentsRefreshKey, setCommentsRefreshKey] = useState(0);
+
+    const handleNewCommentOrReply = () => {
+        setCommentsRefreshKey(prevKey => prevKey + 1);
+    };
     
     const { data: article, error, isLoading } = useQuery(
         ['article', articleId],
@@ -41,11 +49,21 @@ const Single = ({ articleId }) => {
             <span className="text-muted" dangerouslySetInnerHTML={createMarkup(article?.truncated_content)}></span>
             {/* <span className='text-muted'>{article?.truncated_content}</span> */}
             <UserProfile userId={article.author.id} datePosted={article.created_at}/>
-            <ArticleActions articleId={article.id} totalComments={article.comment_count} totalLikes={article.like_count}/>
+            <ArticleActions 
+              articleId={article.id} 
+              totalComments={article.comment_count} 
+              onCommentsToggle={() => setCommentsOpen(!isCommentsOpen)}
+              totalLikes={article.like_count}/>
             {article?.thumbnail && (
               <img src={`${CLOUDINARY_URL}${article?.thumbnail}`} alt={article?.title} className="img-fluid rounded" />
             )}
             <div className="mt-4 mb-5 single-content" dangerouslySetInnerHTML={createMarkup(article?.content)}></div>
+            <div className="comments-section" id="comments-section">
+                <div className="comments-section-header">Comments</div>
+                <NewComment articleId={articleId} onCommentPosted={handleNewCommentOrReply} />
+                <CommentsSection articleId={articleId} refreshKey={commentsRefreshKey} onCommentPosted={handleNewCommentOrReply} />
+            </div>
+
           </article>
         </div>
       </div>
