@@ -22,7 +22,7 @@ const UserFollowers = () => {
 
   return (
     <div className="container">
-      <h2 className="text-left mb-4">People who follow you::</h2>
+      <h2 className="text-left mb-4">People who follow you:</h2>
       <div className="row">
         {followers.map((follower) => (
           <div key={follower.id} className="col-md-2 col-sm-6 mb-3">
