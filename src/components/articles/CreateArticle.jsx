@@ -16,6 +16,7 @@ const CreateNewArticle = () => {
   const [thumbnail, setThumbnail] = useState(null);
   const [previewThumbnail, setPreviewThumbnail] = useState(null);
   const [notification, setNotification] = useState({ message: "", type: "" });
+  const [errors, setErrors] = useState({});
   const history = useNavigate();
 
   useEffect(() => {
@@ -43,6 +44,7 @@ const CreateNewArticle = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setNotification({ message: "", type: "" });
+    setErrors({});
 
     const formData = new FormData();
     formData.append("title", title);
@@ -62,8 +64,12 @@ const CreateNewArticle = () => {
         type: "success",
       });
     } catch (error) {
-      console.error(error);
+      // console.error(error);
+      setErrors(error.response.data);
     }
+  };
+  const isFormValid = () => {
+    return title.trim() !== "" && content.trim() !== "";
   };
 
   return (
@@ -79,6 +85,8 @@ const CreateNewArticle = () => {
                 message={notification.message}
                 type={notification.type}
               />
+              {errors.title && <div className="error">{errors.title[0]}</div>}
+              {errors.content && <div className="error">{errors.content[0]}</div>}
               <div className="form-group text-center">
                 <label htmlFor="thumbnail" className="form-label">
                   Article Thumbnail
@@ -130,7 +138,7 @@ const CreateNewArticle = () => {
                   onSelect={(selectedValue) => setTags(selectedValue)}
                 />
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary"  disabled={!isFormValid()}>
                 Submit
               </button>
             </form>
