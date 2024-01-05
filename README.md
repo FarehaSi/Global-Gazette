@@ -611,7 +611,7 @@ Forking the GitHub Repository
 Forking a GitHub repository allows you to create a personal copy of another user's project on your own GitHub account. This enables you to experiment with changes without affecting the original project.
 
 1.  Visit [GitHub](https://www.github.com) and sign in to your account.
-2.  Navigate to the GitHub Repository you wish to fork. For example, [this repository](https://github.com/jkingportfolio/ci_pp5_tick_it_react).
+2.  Navigate to the GitHub Repository you wish to fork. For example, [this repository](https://github.com/FarehaSi/Global-Gazette).
 3.  Click the "Fork" button located at the top right of the repository page.
 4.  A forked copy of the repository will now be available in your GitHub account.
 
