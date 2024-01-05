@@ -111,6 +111,17 @@ This epic revolves around user profiles and interactions between users. Users ca
 - As a logged-in user, I can edit my profile, including changing my profile picture and bio.
 - As a logged-in user, I can update my username and password for security and display name changes.
 ## Design - UI
+In this section, we'll cover the visual aspects and layout of our project. The design process often begins with wireframes, which help us plan and structure the user interface.
+### Wireframes
+Wireframes were created to outline the key pages and components of the application. This formed the backbone of the site and then additions were made to improve upon thses as the site came into being:
+![1 (1)](https://github.com/FarehaSi/Global-Gazette/assets/116716786/b19e65ae-bad1-43d6-827b-64fe9d9e83f8)
+![1 (2)](https://github.com/FarehaSi/Global-Gazette/assets/116716786/725cff29-cb1f-41b5-8d43-4930feb6757f)
+![1 (4)](https://github.com/FarehaSi/Global-Gazette/assets/116716786/b5da980e-5407-4657-8e3f-2cff590ef987)
+![1 (5)](https://github.com/FarehaSi/Global-Gazette/assets/116716786/5dc41a87-41ea-4aa5-b546-55373412c913)
+![1 (6)](https://github.com/FarehaSi/Global-Gazette/assets/116716786/31717bb2-335a-481c-98c5-27b54bf0c5eb)
+![1 (7)](https://github.com/FarehaSi/Global-Gazette/assets/116716786/3c5e36d7-b2e0-4ffe-8635-9cce70b1afd6)
+<br>
+<br>
 The Global Gazette's overall design philosophy revolves around a clean, intuitive, and user-friendly interface. Readability and ease of navigation are prioritized to ensure that our readers can effortlessly access a world of global insights and stories. The design is aimed at creating a seamless and enjoyable browsing experience.
 ### Typography
 Montserrat has been caefully selected as the primary font. Its modern and bold design complements the theme of the Global Gazette, while ensureing readability and an elegant, timeless feel.
