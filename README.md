@@ -605,6 +605,32 @@ Prerequisites
 *   Heroku CLI installed on the development machine.
 *   A Git repository for the application code.
 
+Forking the GitHub Repository
+-----------------------------
+
+Forking a GitHub repository allows you to create a personal copy of another user's project on your own GitHub account. This enables you to experiment with changes without affecting the original project.
+
+1.  Visit [GitHub](https://www.github.com) and sign in to your account.
+2.  Navigate to the GitHub Repository you wish to fork. For example, [this repository](https://github.com/jkingportfolio/ci_pp5_tick_it_react).
+3.  Click the "Fork" button located at the top right of the repository page.
+4.  A forked copy of the repository will now be available in your GitHub account.
+
+Note: Forking your own repository is not possible unless you are part of a GitHub organization.
+
+Cloning a GitHub Repository
+---------------------------
+
+Cloning a GitHub repository involves creating a local copy of a repository. This allows you to work on the project directly from your machine.
+
+1.  Log in to your GitHub account at [GitHub](https://www.github.com).
+2.  Find the repository you wish to clone. For example, [this repository](https://github.com/FarehaSi/Global-Gazette).
+3.  Click the "Code" button above the file list, then choose your preferred cloning method (HTTPS, SSH, or GitHub CLI).
+4.  Click the clipboard icon to copy the clone URL.
+5.  Open Git Bash on your computer.
+6.  Navigate to the directory where you want the cloned directory to be added.
+7.  Type \`git clone\`, then paste the URL you copied earlier. For example: `git clone https://github.com/FarehaSi/Global-Gazette`.
+8.  Press Enter to create your local clone.
+
 Initial Setup
 -------------
 
@@ -668,6 +694,8 @@ Special thanks to the developers and maintainers of the following libraries and 
 *   **Vite:** For the frontend build tool that improved the development experience.
 *   **React Router:** For managing navigation within the application.
 *   **Heroku:** For hosting the application and providing a platform for easy deployment and scaling.
+
+
 
 External Resources
 ------------------
